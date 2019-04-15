@@ -1,8 +1,37 @@
-<form accept-charset="UTF-8" action="/users" method="post">
+<%
+=begin%>
+ <form accept-charset="UTF-8" action="/users" method="post">
     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 
-  Username: <input type="text" name="username"><br>
-  Email:    <input type="text" name="email"><br>
-  Password: <input type="password" name="password"><br>
+  Username: <input type="text" name="user[username]"><br>
+  Email:    <input type="text" name="user[email]"><br>
+  Password: <input type="password" name="user[password]"><br>
   <input type="submit" value="Submit">
-</form>
+</form> 
+<%
+=end%>
+
+<%
+=begin%>
+ <%= form_tag("/users", method: "post") do %>
+  <%= label_tag(:username, "Username") %>
+  <%= text_field_tag(:username) %>
+  <%= label_tag(:email, "Email") %>
+  <%= email_field_tag(:email) %>
+  <%= label_tag(:password, "Password") %>
+  <%= password_field_tag(:password) %>
+  <%= submit_tag("Submit") %>
+<% end %> 
+<%
+=end%>
+
+
+<%= form_for @user, url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
+  <%= f.label :username, 'Enter Username' %> 
+  <%= f.text_field :username, placeholder: 'ini566' %><br />
+  <%= f.label :password %>
+  <%= f.email_field :email, placeholder: 'ini@microverseinc.org' %><br />
+  <%= f.label :password %>
+  <%= f.password_field :password %><br />
+  <%= f.submit "Submit" %>
+<% end %>
