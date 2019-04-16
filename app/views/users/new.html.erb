@@ -25,13 +25,28 @@
 <%
 =end%>
 
+<% if @user.errors.any? %>
+    <div id="error_explanation">
+        <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+        <ul>
+        <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+        </ul>
+    </div>
+<% end %>
+
+<div>
 
 <%= form_for @user, url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
-  <%= f.label :username, 'Enter Username' %> 
+  <%= f.label :username, 'Enter Username' %> <br />
   <%= f.text_field :username, placeholder: 'ini566' %><br />
-  <%= f.label :password %>
+  <%= f.label :email %><br />
   <%= f.email_field :email, placeholder: 'ini@microverseinc.org' %><br />
-  <%= f.label :password %>
+  <%= f.label :password %><br />
   <%= f.password_field :password %><br />
   <%= f.submit "Submit" %>
 <% end %>
+
+</div>

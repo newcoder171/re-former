@@ -20,7 +20,8 @@ class UsersController < ApplicationController
     end
 
     def update
-        @user = User.new(user_params)
+        @user = User.find(params[:id])
+
         if @user.update(user_params)
             redirect_to new_user_path
         else
